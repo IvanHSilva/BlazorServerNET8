@@ -3,13 +3,19 @@
 <h3>Nova Categoria</h3>
 
 <EditForm Model="@CategoryModel">
-    <InputText @bind-Value="CategoryModel.Name"/>
+    <div class="mb-3">
+        <label class="form-label">Nome:</label>
+        <InputText @bind-Value="CategoryModel.Name" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="/categories">Categorias</a>
 </EditForm>
 
 @code {
     public Category CategoryModel { get; set; } = new();
 
     protected override void OnInitialized() {
-        CategoryModel.Name = "Nova Categoria";
+        
     }
 }
