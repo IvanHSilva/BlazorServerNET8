@@ -2,6 +2,14 @@
 
 <h3>Nova Categoria</h3>
 
-@code {
+<EditForm Model="@CategoryModel">
+    <InputText @bind-Value="CategoryModel.Name"/>
+</EditForm>
 
+@code {
+    public Category CategoryModel { get; set; } = new();
+
+    protected override void OnInitialized() {
+        CategoryModel.Name = "Nova Categoria";
+    }
 }
