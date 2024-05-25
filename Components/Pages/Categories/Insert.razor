@@ -1,9 +1,11 @@
 ﻿@page "/categories/insert"
+@inject ApplicationDbContext Context
+@inject NavigationManager Navigation
 @rendermode InteractiveServer
 
 <h3>Nova Categoria</h3>
 
-<EditForm Model="@CategoryModel">
+<EditForm Model="@CategoryModel" OnValidSubmit="OnSubmitAsync">
 
     <DataAnnotationsValidator/>
     <ValidationSummary/>
@@ -21,4 +23,10 @@
     public Category CategoryModel { get; set; } = new();
 
     protected override void OnInitialized() {}
+
+    public async Task OnSubmitAsync() {
+        await Context.Categories.AddAsync(CategoryModel);
+        await Context.SaveChangesAsync();
+        Navigation.NavigateTo("categories");
+    }
 }
