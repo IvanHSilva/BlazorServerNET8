@@ -1,8 +1,13 @@
 ﻿@page "/categories/insert"
+@rendermode InteractiveServer
 
 <h3>Nova Categoria</h3>
 
 <EditForm Model="@CategoryModel">
+
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
     <div class="mb-3">
         <label class="form-label">Nome:</label>
         <InputText @bind-Value="CategoryModel.Name" class="form-control"/>
@@ -15,7 +20,5 @@
 @code {
     public Category CategoryModel { get; set; } = new();
 
-    protected override void OnInitialized() {
-        
-    }
+    protected override void OnInitialized() {}
 }
