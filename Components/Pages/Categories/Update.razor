@@ -1,0 +1,50 @@
+﻿@page "/categories/update/{id:int}"
+@inject ApplicationDbContext Context
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<h3>Alterar Categoria</h3>
+<br />
+
+@if (CategoryModel is null){
+    <p class="text-center">
+        <em>Categoria não encontrada!</em>
+    </p>
+}
+else{
+    <h3>@CategoryModel.Name (@CategoryModel.Id)</h3>
+}
+
+<EditForm Model="@CategoryModel" OnValidSubmit="OnSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label class="form-label">Nome:</label>
+        <InputText @bind-Value="CategoryModel!.Name" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="/categories">Categorias</a>
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+    public Category CategoryModel { get; set; } = new();
+
+    protected override async Task OnInitializedAsync() {
+
+        //await Task.Delay(2000);
+        CategoryModel = await Context.Categories.AsNoTracking().
+        FirstAsync(c => c.Id == Id);
+    }
+
+    public async Task OnSubmit() {
+        Context.Categories.Update(CategoryModel);
+        await Context.SaveChangesAsync();
+        Navigation.NavigateTo("categories");
+    }
+}
