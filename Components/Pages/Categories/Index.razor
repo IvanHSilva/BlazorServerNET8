@@ -24,7 +24,9 @@ else {
             @foreach (Category category in Categories){
             <tr>
                 <td class="text-center">@category.Id</td>
-                <td>@category.Name</td>
+                <td>
+                    <a href="/categories/@category.Id">@category.Name</a>
+                </td>
                 <td>
                     <a href="/categories/update/@category.Id" 
                     class="btn btn-primary">Alterar</a> 
