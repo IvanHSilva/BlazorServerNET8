@@ -1,0 +1,31 @@
+﻿@page "/categories"
+@inject ApplicationDbContext Context
+
+<h3>Lista de Categorias</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0</td>
+            <td>Categoria</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+@code {
+    public IEnumerable<Category> Categories { get; set; } = 
+    Enumerable.Empty<Category>();
+
+    protected override async Task OnInitializedAsync() {
+        Categories = await Context.Categories.AsNoTracking().ToListAsync();
+    }
+
+}
