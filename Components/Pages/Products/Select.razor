@@ -18,18 +18,15 @@
     <div class="mb-3">
         <label class="form-label">Nome:</label>
         <InputText @bind-Value="ProductModel!.Name" class="form-control" readonly/>
-        <ValidationMessage For="@(() => ProductModel.Name)" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">Preço:</label>
         <InputNumber @bind-Value="ProductModel.Price" class="form-control" readonly />
-        <ValidationMessage For="@(() => ProductModel.Price)" />
     </div>
 
     <div class="mb-3">
         <label class="form-label">Categoria:</label>
-        <InputText @bind-Value="CategoryModel.Name" class="form-control" readonly/>
     </div>
 
     <a href="/products">Voltar</a>
