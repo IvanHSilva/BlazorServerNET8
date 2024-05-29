@@ -26,7 +26,7 @@
                 <tr>
                     <td class="text-center">@product.Id</td>
                     <td>
-                        <a href="/categories/@product.Id">@product.Name</a>
+                        <a href="/products/@product.Id">@product.Name</a>
                     </td>
                     <td class="text-end">@product.Price.ToString("N")</td>
                     <td>@product.Category.Name</td>
@@ -53,5 +53,4 @@
         Products = await Context.Products.AsNoTracking().
         Include(p => p.Category).ToListAsync();
     }
-
 }
