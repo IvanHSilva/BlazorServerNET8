@@ -18,6 +18,7 @@
                 <th class="text-center">Id</th>
                 <th>Nome</th>
                 <th>Preço</th>
+                <th>Categoria</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
                         <a href="/categories/@product.Id">@product.Name</a>
                     </td>
                     <td class="text-end">@product.Price.ToString("N")</td>
+                    <td>@product.Category.Name</td>
                     <td>
                         <a href="/products/update/@product.Id"
                            class="btn btn-primary">Alterar</a>
@@ -48,7 +50,8 @@
     protected override async Task OnInitializedAsync() {
 
         //await Task.Delay(2000);
-        Products = await Context.Products.AsNoTracking().ToListAsync();
+        Products = await Context.Products.AsNoTracking().
+        Include(p => p.Category).ToListAsync();
     }
 
 }
